@@ -100,6 +100,10 @@
       (navigator.maxTouchPoints > 0 && window.matchMedia('(max-width: 768px)').matches);
   }
 
+  function isIOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
   function openExternalLink(url, fallback, alwaysNewTab) {
     if (!url || url === '#') return false;
     const useNewTab = alwaysNewTab || !isMobile();
@@ -701,6 +705,10 @@
       alert("Añade un email válido para confirmar por correo.");
       return;
     }
+    if (isMobile()) {
+      // En móvil: dejar que el <a href="mailto:..."> funcione nativamente para abrir la app de correo
+      return;
+    }
     e.preventDefault();
     openExternalLink(url, fallback);
   });
@@ -727,12 +735,23 @@
   });
 
   const btnOpenGCal = $('btnOpenGCal');
-  btnOpenGCal?.addEventListener('click', (e) => {
-    const url = btnOpenGCal.href;
-    if (!url || url === '#') return;
-    e.preventDefault();
-    openExternalLink(url, null, false);
-  });
+  if (btnOpenGCal) {
+    if (isMobile() && isIOS()) {
+      btnOpenGCal.href = 'comgooglecalendar://';
+      btnOpenGCal.target = '_self';
+      btnOpenGCal.removeAttribute('rel');
+    }
+    btnOpenGCal.addEventListener('click', (e) => {
+      const url = btnOpenGCal.href;
+      if (!url || url === '#') return;
+      if (isMobile()) {
+        // En móvil: dejar que el enlace funcione nativamente para abrir la app
+        return;
+      }
+      e.preventDefault();
+      openExternalLink(url, null, false);
+    });
+  }
 
   function clearStep1() {
     importMessage.value = "";
