@@ -91,7 +91,7 @@
   const RITUALES = [
     { name: "Ritual Ikigai", durations: [110] },
     { name: "Ritual Exprés Ikigai", durations: [50] },
-    { name: "Ritual Ikigai en pareja", durations: [90] }
+    { name: "Ritual Ikigai en pareja", durations: [100] }
   ];
 
   // ---------- Helpers ----------
