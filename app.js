@@ -95,6 +95,24 @@
   ];
 
   // ---------- Helpers ----------
+  function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints > 0 && window.matchMedia('(max-width: 768px)').matches);
+  }
+
+  function openExternalLink(url, fallback, alwaysNewTab) {
+    if (!url || url === '#') return false;
+    const useNewTab = alwaysNewTab || !isMobile();
+    if (useNewTab) {
+      const w = window.open(url, '_blank', 'noopener');
+      if (!w && fallback) window.location.href = fallback;
+    } else {
+      window.location.href = url;
+      if (fallback && !document.hidden) setTimeout(() => { window.location.href = fallback; }, 500);
+    }
+    return true;
+  }
+
   function roundMinutesTo5(min) {
     const m = parseInt(min, 10) || 0;
     const rounded = Math.min(55, Math.round(m / 5) * 5);
@@ -333,8 +351,8 @@
     if (btnWhatsApp) {
       btnWhatsApp.href = waUrl;
       btnWhatsApp.dataset.href = waUrl;
-      btnWhatsApp.target = "_blank";
-      btnWhatsApp.rel = "noopener";
+      btnWhatsApp.target = isMobile() ? "_self" : "_blank";
+      btnWhatsApp.rel = isMobile() ? "" : "noopener";
       btnWhatsApp.setAttribute('aria-disabled', waUrl === "#" ? "true" : "false");
     }
 
@@ -344,15 +362,19 @@
     const mailto = complete && to ? `mailto:${encodeURIComponent(to)}?subject=${subject}&body=${body}` : "#";
     const gmail = complete && to ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${subject}&body=${body}` : "#";
     if (btnEmail) {
-      btnEmail.href = gmail;
+      btnEmail.href = isMobile() ? mailto : gmail;
       btnEmail.dataset.gmail = gmail;
       btnEmail.dataset.mailto = mailto;
+      btnEmail.target = isMobile() ? "_self" : "_blank";
+      btnEmail.rel = isMobile() ? "" : "noopener";
       btnEmail.setAttribute('aria-disabled', !complete || !to ? "true" : "false");
     }
 
     const calUrl = complete ? buildCalendarUrl() : "";
     if (btnCalendar) {
       btnCalendar.href = calUrl || "#";
+      btnCalendar.target = "_blank";
+      btnCalendar.rel = "noopener";
       btnCalendar.setAttribute('aria-disabled', !calUrl ? "true" : "false");
     }
   }
@@ -658,13 +680,6 @@
   });
 
   // ---------- Button guards ----------
-  function openMaybe(url, fallback) {
-    if (!url || url === '#') return false;
-    const w = window.open(url, '_blank', 'noopener');
-    if (!w && fallback) window.location.href = fallback;
-    return true;
-  }
-
   btnWhatsApp?.addEventListener('click', (e) => {
     const url = btnWhatsApp.dataset.href || btnWhatsApp.getAttribute('href');
     if (!url || url === '#') {
@@ -673,19 +688,21 @@
       return;
     }
     e.preventDefault();
-    window.open(url, '_blank', 'noopener');
+    openExternalLink(url);
   });
 
   btnEmail?.addEventListener('click', (e) => {
-    const url = btnEmail.dataset.gmail || btnEmail.getAttribute('href');
-    const mailto = btnEmail.dataset.mailto;
+    const url = isMobile()
+      ? (btnEmail.dataset.mailto || btnEmail.getAttribute('href'))
+      : (btnEmail.dataset.gmail || btnEmail.getAttribute('href'));
+    const fallback = isMobile() ? btnEmail.dataset.gmail : btnEmail.dataset.mailto;
     if (!url || url === '#') {
       e.preventDefault();
       alert("Añade un email válido para confirmar por correo.");
       return;
     }
     e.preventDefault();
-    openMaybe(url, mailto);
+    openExternalLink(url, fallback);
   });
 
   btnCopy?.addEventListener('click', async () => {
@@ -706,7 +723,15 @@
       return;
     }
     e.preventDefault();
-    window.open(url, '_blank', 'noopener');
+    openExternalLink(url, null, true);
+  });
+
+  const btnOpenGCal = $('btnOpenGCal');
+  btnOpenGCal?.addEventListener('click', (e) => {
+    const url = btnOpenGCal.href;
+    if (!url || url === '#') return;
+    e.preventDefault();
+    openExternalLink(url, null, false);
   });
 
   function clearStep1() {
