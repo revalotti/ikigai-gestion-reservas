@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Ikigai · Registro interno de reservas</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="top-sticky">
+    <header class="wrap">
+      <div class="header-inner">
+        <div class="brand">
+          <img src="assets/logo.svg" alt="Ikigai" class="brand-logo"/>
+        </div>
+        <a class="cta-btn secondary header-cta" id="btnOpenGCal" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener" title="Abrir Google Calendar"><i data-lucide="calendar" class="btn-icon"></i><span class="header-cta-text">Calendar</span></a>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <h1 class="h1">Panel de Gestión de Reservas</h1>
+
+      <!-- Stepper -->
+      <nav class="stepper" role="tablist" aria-label="Progreso del registro">
+        <button type="button" class="step-btn active" data-step="1" aria-selected="true" aria-controls="panel-1" id="step-1">
+          <span class="step-num">1</span>
+          <span class="step-label">Origen</span>
+        </button>
+        <span class="step-connector" aria-hidden="true"></span>
+        <button type="button" class="step-btn" data-step="2" aria-selected="false" aria-controls="panel-2" id="step-2">
+          <span class="step-num">2</span>
+          <span class="step-label">Contacto</span>
+        </button>
+        <span class="step-connector" aria-hidden="true"></span>
+        <button type="button" class="step-btn" data-step="3" aria-selected="false" aria-controls="panel-3" id="step-3">
+          <span class="step-num">3</span>
+          <span class="step-label">Reserva</span>
+        </button>
+        <span class="step-connector" aria-hidden="true"></span>
+        <button type="button" class="step-btn" data-step="4" aria-selected="false" aria-controls="panel-4" id="step-4">
+          <span class="step-num">4</span>
+          <span class="step-label">Resumen</span>
+        </button>
+      </nav>
+
+      <!-- Panels -->
+      <div class="wizard-panels">
+        <!-- Paso 1: Origen / Autocompletado -->
+        <section class="wizard-panel active" id="panel-1" role="tabpanel" aria-labelledby="step-1">
+          <div class="card">
+            <h2 class="h2">¿De dónde vienen los datos?</h2>
+            <p class="hint" style="margin-bottom: 16px;">Pega el mensaje recibido (WhatsApp/Correo) para rellenar automáticamente los siguientes pasos.</p>
+            <label for="importMessage">Pegar mensaje recibido</label>
+            <div class="control">
+              <textarea id="importMessage" placeholder="Nombre: Juan&#10;Teléfono: 612 345 678&#10;Servicio: Masaje terapéutico&#10;..."></textarea>
+            </div>
+            <div class="actions" style="margin-top: 16px;">
+              <button class="cta-btn primary" id="btnParse" type="button"><i data-lucide="file-input" class="btn-icon"></i>Crear reserva desde mensaje</button>
+              <button class="cta-btn secondary" id="btnSkipStep1" type="button"><i data-lucide="pen-line" class="btn-icon"></i>Introducir datos manualmente</button>
+            </div>
+          </div>
+          <div class="step-clear">
+            <button class="cta-btn secondary destructive" id="btnClearStep1" type="button"><i data-lucide="trash-2" class="btn-icon"></i>Limpiar</button>
+          </div>
+        </section>
+
+        <!-- Paso 2: Contacto -->
+        <section class="wizard-panel" id="panel-2" role="tabpanel" aria-labelledby="step-2" hidden>
+          <div class="card">
+            <h2 class="h2">Información de contacto</h2>
+            <p class="hint" style="margin-bottom: 16px;">Datos del cliente para la confirmación y el calendario.</p>
+            <div class="fields">
+              <div>
+                <label>Nombre</label>
+                <div class="control"><input id="clientName" placeholder="Nombre completo"/><button aria-label="Borrar nombre" class="field-clear" data-for="clientName" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button></div>
+              </div>
+              <div>
+                <label>Teléfono</label>
+                <div class="control phone-control">
+                  <select id="phonePrefix" aria-label="Prefijo del teléfono">
+                    <option value="+1">+1</option><option value="+7">+7</option><option value="+20">+20</option><option value="+211">+211</option><option value="+212">+212</option><option value="+213">+213</option><option value="+216">+216</option><option value="+218">+218</option><option value="+220">+220</option><option value="+221">+221</option><option value="+222">+222</option><option value="+223">+223</option><option value="+224">+224</option><option value="+225">+225</option><option value="+226">+226</option><option value="+227">+227</option><option value="+228">+228</option><option value="+229">+229</option><option value="+230">+230</option><option value="+231">+231</option><option value="+232">+232</option><option value="+233">+233</option><option value="+234">+234</option><option value="+235">+235</option><option value="+236">+236</option><option value="+237">+237</option><option value="+238">+238</option><option value="+239">+239</option><option value="+240">+240</option><option value="+241">+241</option><option value="+242">+242</option><option value="+243">+243</option><option value="+244">+244</option><option value="+245">+245</option><option value="+246">+246</option><option value="+248">+248</option><option value="+249">+249</option><option value="+250">+250</option><option value="+251">+251</option><option value="+252">+252</option><option value="+253">+253</option><option value="+254">+254</option><option value="+255">+255</option><option value="+256">+256</option><option value="+257">+257</option><option value="+258">+258</option><option value="+260">+260</option><option value="+261">+261</option><option value="+262">+262</option><option value="+263">+263</option><option value="+264">+264</option><option value="+265">+265</option><option value="+266">+266</option><option value="+267">+267</option><option value="+268">+268</option><option value="+269">+269</option><option value="+27">+27</option><option value="+290">+290</option><option value="+291">+291</option><option value="+297">+297</option><option value="+298">+298</option><option value="+299">+299</option><option value="+30">+30</option><option value="+31">+31</option><option value="+32">+32</option><option value="+33">+33</option><option value="+34" selected>+34</option><option value="+350">+350</option><option value="+351">+351</option><option value="+352">+352</option><option value="+353">+353</option><option value="+354">+354</option><option value="+355">+355</option><option value="+356">+356</option><option value="+357">+357</option><option value="+358">+358</option><option value="+359">+359</option><option value="+36">+36</option><option value="+370">+370</option><option value="+371">+371</option><option value="+372">+372</option><option value="+373">+373</option><option value="+374">+374</option><option value="+375">+375</option><option value="+376">+376</option><option value="+377">+377</option><option value="+378">+378</option><option value="+379">+379</option><option value="+380">+380</option><option value="+381">+381</option><option value="+382">+382</option><option value="+383">+383</option><option value="+385">+385</option><option value="+386">+386</option><option value="+387">+387</option><option value="+389">+389</option><option value="+39">+39</option><option value="+40">+40</option><option value="+41">+41</option><option value="+420">+420</option><option value="+421">+421</option><option value="+423">+423</option><option value="+43">+43</option><option value="+44">+44</option><option value="+45">+45</option><option value="+46">+46</option><option value="+47">+47</option><option value="+48">+48</option><option value="+49">+49</option><option value="+500">+500</option><option value="+501">+501</option><option value="+502">+502</option><option value="+503">+503</option><option value="+504">+504</option><option value="+505">+505</option><option value="+506">+506</option><option value="+507">+507</option><option value="+508">+508</option><option value="+509">+509</option><option value="+51">+51</option><option value="+52">+52</option><option value="+53">+53</option><option value="+54">+54</option><option value="+55">+55</option><option value="+56">+56</option><option value="+57">+57</option><option value="+58">+58</option><option value="+590">+590</option><option value="+591">+591</option><option value="+592">+592</option><option value="+593">+593</option><option value="+594">+594</option><option value="+595">+595</option><option value="+596">+596</option><option value="+597">+597</option><option value="+598">+598</option><option value="+599">+599</option><option value="+60">+60</option><option value="+61">+61</option><option value="+62">+62</option><option value="+63">+63</option><option value="+64">+64</option><option value="+65">+65</option><option value="+66">+66</option><option value="+670">+670</option><option value="+672">+672</option><option value="+673">+673</option><option value="+674">+674</option><option value="+675">+675</option><option value="+676">+676</option><option value="+677">+677</option><option value="+678">+678</option><option value="+679">+679</option><option value="+680">+680</option><option value="+681">+681</option><option value="+682">+682</option><option value="+683">+683</option><option value="+685">+685</option><option value="+686">+686</option><option value="+687">+687</option><option value="+688">+688</option><option value="+689">+689</option><option value="+690">+690</option><option value="+691">+691</option><option value="+692">+692</option><option value="+81">+81</option><option value="+82">+82</option><option value="+84">+84</option><option value="+850">+850</option><option value="+852">+852</option><option value="+853">+853</option><option value="+855">+855</option><option value="+856">+856</option><option value="+86">+86</option><option value="+880">+880</option><option value="+886">+886</option><option value="+90">+90</option><option value="+91">+91</option><option value="+92">+92</option><option value="+93">+93</option><option value="+94">+94</option><option value="+95">+95</option><option value="+960">+960</option><option value="+961">+961</option><option value="+962">+962</option><option value="+963">+963</option><option value="+964">+964</option><option value="+965">+965</option><option value="+966">+966</option><option value="+967">+967</option><option value="+968">+968</option><option value="+970">+970</option><option value="+971">+971</option><option value="+972">+972</option><option value="+973">+973</option><option value="+974">+974</option><option value="+975">+975</option><option value="+976">+976</option><option value="+977">+977</option><option value="+98">+98</option><option value="+992">+992</option><option value="+993">+993</option><option value="+994">+994</option><option value="+995">+995</option><option value="+996">+996</option><option value="+998">+998</option>
+                  </select>
+                  <input id="phone" type="tel" placeholder="612 345 678"/><button aria-label="Borrar teléfono" class="field-clear" data-for="phone" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div class="row-full">
+                <label>Email</label>
+                <div class="control"><input id="email" type="email" placeholder="correo@ejemplo.com"/><button aria-label="Borrar email" class="field-clear" data-for="email" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button></div>
+              </div>
+            </div>
+            <div id="formatWarning" class="format-warning" role="alert" hidden>
+              <span id="formatWarningText"></span>
+            </div>
+            <div class="actions wizard-nav" style="margin-top: 20px;">
+              <button class="cta-btn secondary" id="btnBack2" type="button"><i data-lucide="arrow-left" class="btn-icon"></i>Atrás</button>
+              <button class="cta-btn primary" id="btnNext2" type="button">Siguiente<i data-lucide="arrow-right" class="btn-icon"></i></button>
+            </div>
+          </div>
+          <div class="step-clear">
+            <button class="cta-btn secondary destructive" id="btnClearStep2" type="button"><i data-lucide="trash-2" class="btn-icon"></i>Limpiar</button>
+          </div>
+        </section>
+
+        <!-- Paso 3: Reserva -->
+        <section class="wizard-panel" id="panel-3" role="tabpanel" aria-labelledby="step-3" hidden>
+          <div class="card">
+            <h2 class="h2">Detalles de la reserva</h2>
+            <p class="hint" style="margin-bottom: 16px;">Servicio, tratamiento, fecha y hora.</p>
+            <div class="fields">
+              <div>
+                <label>Bono</label>
+                <div class="control"><select id="bono"><option disabled selected value="">Selecciona un bono</option><option value="Bono Mensual">Bono Mensual</option><option value="Bono Regalo">Bono Regalo</option></select><button aria-label="Borrar bono" class="field-clear" data-for="bono" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button></div>
+              </div>
+              <div>
+                <label>Tipo de servicio</label>
+                <div class="control"><select id="serviceType"><option disabled selected value="">Selecciona tipo</option><option value="Masaje terapéutico">Masaje terapéutico</option><option value="Ritual">Ritual</option></select><button aria-label="Borrar tipo de servicio" class="field-clear" data-for="serviceType" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button></div>
+              </div>
+              <div>
+                <label>Tratamiento</label>
+                <div class="control"><select id="treatment"><option disabled selected value="">Selecciona tratamiento</option></select><button aria-label="Borrar tratamiento" class="field-clear" data-for="treatment" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button></div>
+              </div>
+              <div>
+                <label>Duración</label>
+                <div class="control"><select id="duration"><option disabled selected value="">Selecciona duración</option></select><button aria-label="Borrar duración" class="field-clear" data-for="duration" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button></div>
+              </div>
+              <div>
+                <label>Fecha</label>
+                <div class="control custom-picker-control">
+                  <div class="custom-date-picker">
+                    <input id="date" type="hidden" value=""/>
+                    <button type="button" class="custom-picker-trigger custom-date-trigger" aria-haspopup="dialog" aria-expanded="false">Selecciona fecha</button>
+                    <div class="custom-date-dropdown" role="dialog" aria-label="Calendario" hidden></div>
+                  </div>
+                  <button aria-label="Borrar fecha" class="field-clear" data-for="date" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div>
+                <label>Hora</label>
+                <div class="control custom-picker-control">
+                  <div class="custom-time-picker">
+                    <input id="time" type="hidden" value=""/>
+                    <button type="button" class="custom-picker-trigger custom-time-trigger" aria-haspopup="listbox" aria-expanded="false">Selecciona hora</button>
+                    <div class="custom-time-dropdown" role="listbox" aria-label="Hora" hidden></div>
+                  </div>
+                  <button aria-label="Borrar hora" class="field-clear" data-for="time" hidden type="button"><i data-lucide="x" class="field-clear-icon" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="actions wizard-nav" style="margin-top: 20px;">
+              <button class="cta-btn secondary" id="btnBack3" type="button"><i data-lucide="arrow-left" class="btn-icon"></i>Atrás</button>
+              <button class="cta-btn primary" id="btnNext3" type="button">Siguiente<i data-lucide="arrow-right" class="btn-icon"></i></button>
+            </div>
+          </div>
+          <div class="step-clear">
+            <button class="cta-btn secondary destructive" id="btnClearStep3" type="button"><i data-lucide="trash-2" class="btn-icon"></i>Limpiar</button>
+          </div>
+        </section>
+
+        <!-- Paso 4: Resumen -->
+        <section class="wizard-panel" id="panel-4" role="tabpanel" aria-labelledby="step-4" hidden>
+          <div class="card">
+            <h2 class="h2">Resumen y confirmación</h2>
+            <p class="hint" style="margin-bottom: 16px;">Revisa los datos y confirma la reserva o añádela al calendario.</p>
+            <div class="summary-grid">
+              <div class="kv"><div>Cliente</div><div id="pvClient">—</div></div>
+              <div class="kv"><div>Servicio</div><div id="pvService">—</div></div>
+              <div class="kv"><div>Tratamiento</div><div id="pvTreatment">—</div></div>
+              <div class="kv"><div>Fecha y hora</div><div id="pvDateTime">—</div></div>
+              <div class="kv"><div>Duración</div><div id="pvDuration">—</div></div>
+            </div>
+            <div id="contactWarning" class="contact-warning" role="alert" hidden>
+              <span id="contactWarningText"></span>
+              <button type="button" class="cta-btn secondary contact-warning-btn" id="btnGoToContacto"><i data-lucide="user" class="btn-icon"></i>Ir a Contacto</button>
+            </div>
+            <div class="message-box" style="margin-top: 18px;">
+              <button class="copy-inline" id="btnCopy" type="button"><i data-lucide="copy" class="btn-icon"></i>Copiar resumen</button>
+              <div class="mono" id="pvMessage">—</div>
+            </div>
+            <div class="actions" style="margin-top: 18px; gap: 12px;">
+              <a class="cta-btn calendar" href="#" id="btnCalendar"><i data-lucide="calendar-plus" class="btn-icon"></i>Añadir a Calendar</a>
+              <a class="cta-btn whatsapp" href="#" id="btnWhatsApp" rel="noopener"><i data-lucide="message-circle" class="btn-icon"></i>Confirmar por WhatsApp</a>
+              <a class="cta-btn email" href="#" id="btnEmail"><i data-lucide="mail" class="btn-icon"></i>Confirmar por Correo</a>
+            </div>
+            <div class="actions wizard-nav" style="margin-top: 14px;">
+              <button class="cta-btn primary" id="btnNewReservation" type="button"><i data-lucide="plus" class="btn-icon"></i>Nueva reserva</button>
+              <button class="cta-btn secondary" id="btnBack4" type="button"><i data-lucide="pen-line" class="btn-icon"></i>Editar reserva</button>
+            </div>
+          </div>
+          <div class="step-clear">
+            <button class="cta-btn secondary destructive" id="btnClearStep4" type="button"><i data-lucide="trash-2" class="btn-icon"></i>Limpiar</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>Todos los derechos reservados a<br>Ikigai · Centro de masajes</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="app.js"></script>
+</body>
+</html>

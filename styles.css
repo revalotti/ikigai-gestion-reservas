@@ -1,0 +1,1080 @@
+:root {
+  /* Brand colors */
+  --nogal: #776B5D;
+  --albura: #EBE3D5;
+  --veta: #1F1F1F;
+
+  /* Mango palette (warnings) */
+  --mango-100: #FDF6E8;
+  --mango-200: #FAE7C5;
+  --mango-300: #F7D8A3;
+  --mango-400: #F3C880;
+  --mango-500: #F0B95E;
+  --mango-600: #EDAA3B;
+  --mango-700: #BE882E;
+  --mango-800: #8E6520;
+  --mango-900: #5F4313;
+
+  /* Derived palette */
+  --paper: var(--albura);
+  --ink: var(--veta);
+  --muted: rgba(31, 31, 31, 0.64);
+  --line: rgba(31, 31, 31, 0.18);
+  --line-strong: rgba(31, 31, 31, 0.30);
+  --wash: rgba(31, 31, 31, 0.04);
+
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  --max: 1120px;
+  --px: clamp(16px, 3vw, 28px);
+
+  /* v28-like radius */
+  --radius: 8px;
+
+  /* Buttons */
+  --btn-h: 48px;
+  --btn-px: 16px;
+
+  --gap: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--px);
+}
+
+.top-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(235, 227, 213, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  min-height: 64px;
+}
+
+/* El botón del header no debe comprimirse nunca */
+.header-inner .cta-btn.header-cta {
+  flex-shrink: 0;
+}
+
+/* Brand puede reducirse si hace falta espacio */
+.header-inner .brand {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* 401px–768px: icono + "Calendar" */
+@media (max-width: 768px) {
+  .header-inner .cta-btn.header-cta {
+    min-height: 48px;
+    padding: 0 14px;
+    touch-action: manipulation;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-cta .btn-icon {
+    margin: 0 !important;
+  }
+
+  /* Logo más compacto para dejar espacio al botón */
+  .header-inner .brand-logo {
+    height: 56px;
+    max-width: 100%;
+  }
+}
+
+/* Pantallas muy reducidas: solo icono cuando el logo se acerca demasiado */
+@media (max-width: 400px) {
+  .header-cta-text {
+    display: none;
+  }
+
+  .header-inner .cta-btn.header-cta {
+    min-width: 48px;
+    width: 48px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .header-inner .brand-logo {
+    height: 44px;
+    max-width: 100%;
+  }
+}
+
+.pill {
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(31, 31, 31, 0.03);
+  font-size: 14px;
+}
+
+main {
+  padding: 22px 0 44px;
+  flex: 1 0 auto;
+}
+
+/* Footer: estilos coherentes con header */
+.site-footer {
+  margin-top: auto;
+  background: rgba(235, 227, 213, 0.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+  padding: 18px 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.grid-reg {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--gap);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .grid-reg {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  border: 1px solid rgba(31, 31, 31, 0.28);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(31, 31, 31, 0.04) inset;
+}
+
+.h2 {
+  font-family: var(--serif);
+  font-size: 24px;
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+.h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  margin: 0 0 10px;
+  font-weight: 500;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* Inputs - Usability & design */
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.25);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.4;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  cursor: text;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.9;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: rgba(31, 31, 31, 0.4);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--nogal);
+  box-shadow: 0 0 0 2px rgba(119, 107, 93, 0.25);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: var(--nogal);
+  box-shadow: 0 0 0 2px rgba(119, 107, 93, 0.35);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Autofill - mantiene coherencia con el diseño */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px rgba(235, 227, 213, 0.5) inset;
+  -webkit-text-fill-color: var(--ink);
+}
+
+/* Select - apariencia coherente */
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23776B5D' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* Inputs date/time - mejor legibilidad */
+input[type="date"],
+input[type="time"] {
+  color-scheme: light;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Paso 1: textarea de importación con mayor altura para visualizar mensajes */
+#importMessage {
+  min-height: 280px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.row-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 720px) {
+  .fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Control: field + clear button outside */
+.control {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.control > input,
+.control > select,
+.control > textarea {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Teléfono: prefijo + número en línea */
+.phone-control {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.phone-control #phonePrefix {
+  flex: 0 0 auto;
+  width: 100px;
+  min-width: 100px;
+}
+
+.phone-control #phone {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Botón limpiar: estilos coherentes con inputs */
+.field-clear {
+  width: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.25);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.field-clear:hover {
+  border-color: rgba(31, 31, 31, 0.4);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.field-clear:focus-visible {
+  outline: none;
+  border-color: var(--nogal);
+  box-shadow: 0 0 0 2px rgba(119, 107, 93, 0.25);
+}
+
+.field-clear[hidden] {
+  display: none !important;
+}
+
+.field-clear-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+}
+
+.field-clear:hover .field-clear-icon {
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .field-clear {
+    min-width: 48px;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+}
+
+/* Custom date & time pickers - estilos de la página */
+.custom-picker-control .custom-date-picker,
+.custom-picker-control .custom-time-picker {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+}
+
+.custom-picker-trigger {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.25);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.custom-picker-trigger:hover {
+  border-color: rgba(31, 31, 31, 0.4);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.custom-picker-trigger[aria-expanded="true"] {
+  border-color: var(--nogal);
+  box-shadow: 0 0 0 2px rgba(119, 107, 93, 0.25);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.custom-picker-trigger.placeholder {
+  color: var(--muted);
+}
+
+.custom-date-dropdown,
+.custom-time-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 60;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(31, 31, 31, 0.12);
+  padding: 14px;
+  font-family: var(--sans);
+}
+
+/* Date picker calendar */
+.custom-date-dropdown {
+  min-width: 280px;
+}
+
+.date-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 8px;
+}
+
+.date-picker-month {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.date-picker-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.date-picker-nav-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-family: var(--sans);
+  transition: background 0.2s;
+}
+
+.date-picker-nav-btn:hover {
+  background: rgba(119, 107, 93, 0.2);
+}
+
+.date-picker-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+}
+
+.date-picker-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.date-picker-day {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.date-picker-day:hover:not(.empty):not(.selected) {
+  background: rgba(119, 107, 93, 0.15);
+}
+
+.date-picker-day.empty {
+  cursor: default;
+  color: transparent;
+}
+
+.date-picker-day.today {
+  font-weight: 600;
+  color: var(--nogal);
+}
+
+.date-picker-day.selected {
+  background: var(--nogal);
+  color: var(--albura);
+}
+
+.date-picker-day.disabled {
+  color: var(--muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Time picker */
+.custom-time-dropdown {
+  min-width: 160px;
+}
+
+.time-picker-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.time-picker-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.time-picker-col label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0;
+}
+
+.time-picker-select {
+  width: 64px;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.5);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+.time-picker-select:focus {
+  outline: none;
+  border-color: var(--nogal);
+}
+
+/* Buttons */
+.cta-btn svg,
+.copy-inline svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.cta-btn svg:first-child,
+.copy-inline svg:first-child {
+  margin-right: 8px;
+}
+
+.cta-btn svg:last-child:not(:first-child),
+.copy-inline svg:last-child:not(:first-child) {
+  margin-left: 8px;
+}
+
+.cta-btn {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+
+  height: var(--btn-h);
+  min-height: var(--btn-h);
+  padding: 0 var(--btn-px);
+  line-height: 1;
+
+  border-radius: var(--radius);
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+  user-select: none;
+  /* Mejor respuesta táctil en móvil */
+  -webkit-tap-highlight-color: rgba(119, 107, 93, 0.15);
+}
+
+.cta-btn.primary {
+  background: var(--nogal);
+  color: var(--albura);
+  border-color: var(--nogal);
+}
+
+.cta-btn.secondary {
+  border-color: var(--nogal);
+  color: var(--nogal);
+  background: transparent;
+}
+
+/* Confirmar por correo */
+.cta-btn.email {
+  background: #94214F;
+  color: var(--albura);
+  border-color: #94214F;
+}
+
+.cta-btn.email:hover {
+  background: #7b1b42;
+  border-color: #7b1b42;
+}
+
+.cta-btn.calendar {
+  background: #5c6f7e;
+  color: var(--albura);
+  border-color: #5c6f7e;
+}
+
+.cta-btn.calendar:hover {
+  background: #4d5f6d;
+  border-color: #4d5f6d;
+}
+
+.cta-btn.whatsapp {
+  background: #5d7a5d;
+  color: var(--albura);
+  border-color: #5d7a5d;
+}
+
+.cta-btn.whatsapp:hover {
+  background: #4e6a4e;
+  border-color: #4e6a4e;
+}
+
+.cta-btn.secondary.destructive {
+  border-color: rgba(180, 70, 60, 0.6);
+  color: #a04540;
+  background: transparent;
+}
+
+.cta-btn.secondary.destructive:hover {
+  border-color: rgba(180, 70, 60, 0.8);
+  color: #8a3632;
+  background: rgba(180, 70, 60, 0.08);
+}
+
+/* Botones deshabilitados (p. ej. WhatsApp/Email sin datos de contacto) */
+.cta-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.step-clear {
+  margin-top: 14px;
+  padding-top: 4px;
+}
+
+.step-clear .cta-btn {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .step-clear .cta-btn {
+    min-height: 52px;
+    touch-action: manipulation;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.actions .cta-btn {
+  flex: 1 1 auto;
+}
+
+/* Mobile: botones más accesibles y separados para evitar missclicks */
+@media (max-width: 768px) {
+  .actions {
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .actions .cta-btn {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 20px;
+    font-size: 15px;
+    /* Área táctil ampliada (touch-action evita delay de zoom) */
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 520px) {
+  .actions .cta-btn {
+    width: 100%;
+  }
+}
+
+.preview .kv {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  font-size: 13px;
+  margin-bottom: 6px;
+  gap: 10px;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  border: 1px solid var(--line);
+  padding: 12px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.12);
+  white-space: pre-wrap;
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Aviso de formato incorrecto (step 2): mismo estilo que contact-warning */
+.format-warning {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-top: 16px;
+  padding: 16px 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--mango-200);
+  border: 1px solid var(--mango-400);
+  border-left: 4px solid var(--mango-700);
+  border-radius: var(--radius);
+  color: var(--mango-900);
+}
+
+.format-warning[hidden] {
+  display: none !important;
+}
+
+/* Aviso de contacto faltante: paleta Mango, acento cálido de aviso */
+.contact-warning {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-top: 16px;
+  padding: 16px 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--mango-200);
+  border: 1px solid var(--mango-400);
+  border-left: 4px solid var(--mango-700);
+  border-radius: var(--radius);
+  color: var(--mango-900);
+}
+
+.contact-warning[hidden] {
+  display: none !important;
+}
+
+.contact-warning-btn {
+  flex-shrink: 0;
+}
+
+/* Mobile: botón "Ir a Contacto" accesible */
+@media (max-width: 768px) {
+  .contact-warning {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-warning-btn {
+    align-self: flex-start;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+}
+
+.brand-mark {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.2px;
+}
+
+.brand-logo {
+  height: 72px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.h1 {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 600;
+  margin: 18px 0 18px;
+  line-height: 1.15;
+}
+
+@media (max-width: 720px) {
+  .h1 {
+    font-size: 28px;
+  }
+}
+
+/* ---------- Stepper / Wizard ---------- */
+.stepper {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 28px;
+  padding: 4px 0;
+}
+
+.step-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.step-btn:hover {
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--ink);
+}
+
+.step-btn.active {
+  background: var(--nogal);
+  border-color: var(--nogal);
+  color: var(--albura);
+}
+
+.step-btn.done {
+  background: rgba(119, 107, 93, 0.15);
+  border-color: var(--nogal);
+  color: var(--nogal);
+}
+
+.step-num {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.step-btn .step-num {
+  background: rgba(31, 31, 31, 0.12);
+  color: inherit;
+}
+
+.step-btn.active .step-num {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.step-btn.done .step-num {
+  background: var(--nogal);
+  color: var(--albura);
+}
+
+.step-label {
+  white-space: nowrap;
+}
+
+.step-connector {
+  flex: 0 0 10px;
+  min-width: 10px;
+  align-self: center;
+  height: 2px;
+  background: var(--line);
+}
+
+@media (max-width: 680px) {
+  .step-btn .step-label {
+    display: none;
+  }
+}
+
+/* Mobile: stepper con áreas táctiles más grandes */
+@media (max-width: 768px) {
+  .step-btn {
+    min-height: 48px;
+    padding: 12px 14px;
+    touch-action: manipulation;
+  }
+
+  .step-connector {
+    flex: 0 0 6px;
+    min-width: 6px;
+  }
+}
+
+.wizard-panels {
+  position: relative;
+  min-height: 280px;
+}
+
+.wizard-panel {
+  animation: panelFade 0.25s ease;
+}
+
+.wizard-panel[hidden] {
+  display: none !important;
+}
+
+.wizard-panel.active {
+  display: block;
+}
+
+@keyframes panelFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wizard-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wizard-nav .cta-btn.secondary {
+  order: -1;
+}
+
+/* Mobile: navegación wizard con botones más grandes y separados */
+@media (max-width: 768px) {
+  .wizard-nav {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .wizard-nav .cta-btn {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 20px;
+    font-size: 15px;
+    touch-action: manipulation;
+  }
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px 24px;
+}
+
+.summary-grid .kv {
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 13px;
+  gap: 4px;
+}
+
+.summary-grid .kv > div:first-child {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.message-box {
+  position: relative;
+}
+
+.copy-inline {
+  font-family: var(--sans);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-inline:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* Mobile: botón copiar con área táctil accesible (min 44px) */
+@media (max-width: 768px) {
+  .copy-inline {
+    min-height: 44px;
+    height: 44px;
+    padding: 0 16px;
+    font-size: 14px;
+    touch-action: manipulation;
+  }
+}
